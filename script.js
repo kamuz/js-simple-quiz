@@ -85,5 +85,23 @@ function getSelected(){
 // Submit
 submitBtn.addEventListener('click', ()=>{
     const answer = getSelected();
-    console.log(answer);
+    // If correct answer will update score
+    if(answer){
+        if(answer == quizData[currentQuiz].correct){
+            score++;
+        }
+
+        currentQuiz++;
+
+        // Update next quiz question
+        if(currentQuiz < quizData.length){
+            loadQuiz();
+        } else {
+            // Final results
+            quiz.innerHTML = `
+                <h2>You answered correctly at ${score} / ${quizData.length} questions</h2>
+                <button onclick="location.reload()">Reload</button>
+            `;
+        }
+    }
 });
